@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
                     Log.v("value", "로그인 성공");
                     Intent myIntent = new Intent(MainActivity.this, subActivity.class);
 
-
                     myIntent.putExtra("ID", id_input);
                     myIntent.putExtra("PW", pw_input);
                     //2. 인텐트 실행
