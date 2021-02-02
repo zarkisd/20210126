@@ -29,8 +29,8 @@ public class subActivity extends AppCompatActivity {
     //4. Adapter listView에 부착
 
     //실습  ArrayList 생성하고 톡 5개 추가시키기
-    ArrayList<String> list = new ArrayList<>();
-    ArrayAdapter<String> adapter;
+    ArrayList<TalkVO> talk = new ArrayList<>();
+    TalkAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +49,16 @@ public class subActivity extends AppCompatActivity {
 
         ListView listview = findViewById(R.id.listview);
 
-        String[] arr = {"손준호", "도한재", "오유정", "김민희", "오경민", "장현석", "오주율", "양기영", "김동준", "임마루"};
-        for (int i = 0; i < arr.length; i++) {
-            list.add(arr[i] + " 출석");
-        }
 
-        adapter = new ArrayAdapter<String>(subActivity.this, R.layout.simplelist, list);
+        talk.add(new TalkVO(R.drawable.image1, "김민희", "다 죽어라!!!", "23:58"));
+        talk.add(new TalkVO(R.drawable.image2, "오경민", "미니 술먹었어? ㅋㅋㅋㅋ", "00:01"));
+        talk.add(new TalkVO(R.drawable.image3, "오유정", "오매오매 언닠ㅋㅋㅋㅋㅋㅋ", "00:02"));
+        talk.add(new TalkVO(R.drawable.image4, "손준호", "어차피 내일이면 기억못해 저 누나", "00:03"));
+
+        //실습!!
+        //ArrayAdapter textview로 단독으로 있을떄만 사용가능
+        // baseAdaper상속받은 새로운 어댑터 설계
+        adapter = new TalkAdapter(subActivity.this, R.layout.talklayout, talk);
 
         listview.setAdapter(adapter);
 
@@ -76,15 +80,12 @@ public class subActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Toast.makeText(subActivity.this, "addition", Toast.LENGTH_SHORT).show();
-                Log.v("value", "버튼 클릭3" + list.toString());
+                Log.v("value", "버튼 클릭3" + talk.toString());
                 String msg = edt_msg.getText().toString();
                 if (msg.length() != 0) {
-                    list.add(msg);
+                    talk.add(new TalkVO(R.drawable.image4, "손준호", "input_test", "00:04"));
                     //어댑터 새로고침
                     adapter.notifyDataSetChanged();
-
-
-
 
                 }
                 //editText에 적혀있는 글자 지우기
