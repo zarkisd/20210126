@@ -16,7 +16,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 
 public class subActivity extends AppCompatActivity {
     Button btn_pre, btn_send;
@@ -28,9 +35,22 @@ public class subActivity extends AppCompatActivity {
     //3.  Adapter  만들어서 디자인+ 톡 데이터 합치기
     //4. Adapter listView에 부착
 
+
+
     //실습  ArrayList 생성하고 톡 5개 추가시키기
     ArrayList<TalkVO> talk = new ArrayList<>();
     TalkAdapter adapter;
+
+
+    //GoogleCloud Server - FireBase 연동해보기
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance("https://junhotalk-0203-default-rtdb.firebaseio.com/");
+    DatabaseReference ref = database.getReference("msg");
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +99,28 @@ public class subActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
+                long now = System.currentTimeMillis();
+                Date mDate = new Date(now);
+                SimpleDateFormat simpleDate = new SimpleDateFormat("HH:mm");
+                String getTime = simpleDate.format(mDate);
+
+
+                Log.v("value", getTime);
+
+
+
                 Toast.makeText(subActivity.this, "addition", Toast.LENGTH_SHORT).show();
                 Log.v("value", "버튼 클릭3" + talk.toString());
                 String msg = edt_msg.getText().toString();
                 if (msg.length() != 0) {
-                    talk.add(new TalkVO(R.drawable.image4, "손준호", "input_test", "00:04"));
+                    talk.add(new TalkVO(R.drawable.image4, "손준호", msg, getTime));
+                    //firebase로 데이터 전송하기
+
+
+                    ref.push().setValue(new TalkVO(R.drawable.image4, "손준호", msg, getTime));
+                    
+                    
                     //어댑터 새로고침
                     adapter.notifyDataSetChanged();
 

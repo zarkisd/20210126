@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "128768499377",
+    "project_id": "junhotalk-0203",
+    "storage_bucket": "junhotalk-0203.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128768499377:android:5cc9392a0f385ab36fcc90",
+        "android_client_info": {
+          "package_name": "com.example.a20210126"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128768499377-r59usn12tcjvudrn9p5jb5b56g451sl8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSYYhkQ3E-TMQvUlanjdr-tprK-JYuQHI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128768499377-r59usn12tcjvudrn9p5jb5b56g451sl8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
