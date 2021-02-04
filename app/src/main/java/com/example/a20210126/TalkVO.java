@@ -10,6 +10,9 @@ public class TalkVO {
 
     private int img;
     private String tv_name, tv_text, tv_time;
+    public TalkVO(){
+
+    }
 
     public TalkVO(int img, String tv_name, String tv_text, String tv_time) {
         this.img = img;

@@ -1,5 +1,7 @@
 package com.example.a20210126;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -17,6 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -57,6 +62,38 @@ public class subActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
 
+        ref.addChildEventListener(new ChildEventListener() {
+            // 하위 경로에 무슨일이 생겼을떄를 감지
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
+//추가
+                TalkVO temp=dataSnapshot.getValue(TalkVO.class);
+                talk.add(temp);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//자식 바뀜
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+//자식 제거
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//자식 옮김
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+//에러 오류
+            }
+        });
+
+
         btn_pre = findViewById(R.id.btn_pre);
         btn_send = findViewById(R.id.btn_send);
         textView = (TextView) findViewById(R.id.tv_result);
@@ -70,10 +107,10 @@ public class subActivity extends AppCompatActivity {
         ListView listview = findViewById(R.id.listview);
 
 
-        talk.add(new TalkVO(R.drawable.image1, "김민희", "다 죽어라!!!", "23:58"));
-        talk.add(new TalkVO(R.drawable.image2, "오경민", "미니 술먹었어? ㅋㅋㅋㅋ", "00:01"));
-        talk.add(new TalkVO(R.drawable.image3, "오유정", "오매오매 언닠ㅋㅋㅋㅋㅋㅋ", "00:02"));
-        talk.add(new TalkVO(R.drawable.image4, "손준호", "어차피 내일이면 기억못해 저 누나", "00:03"));
+        //talk.add(new TalkVO(R.drawable.image1, "김민희", "다 죽어라!!!", "23:58"));
+        //talk.add(new TalkVO(R.drawable.image2, "오경민", "미니 술먹었어? ㅋㅋㅋㅋ", "00:01"));
+        //talk.add(new TalkVO(R.drawable.image3, "오유정", "오매오매 언닠ㅋㅋㅋㅋㅋㅋ", "00:02"));
+        //talk.add(new TalkVO(R.drawable.image4, "손준호", "어차피 내일이면 기억못해 저 누나", "00:03"));
 
         //실습!!
         //ArrayAdapter textview로 단독으로 있을떄만 사용가능
@@ -114,7 +151,7 @@ public class subActivity extends AppCompatActivity {
                 Log.v("value", "버튼 클릭3" + talk.toString());
                 String msg = edt_msg.getText().toString();
                 if (msg.length() != 0) {
-                    talk.add(new TalkVO(R.drawable.image4, "손준호", msg, getTime));
+                    //talk.add(new TalkVO(R.drawable.image4, "손준호", msg, getTime));
                     //firebase로 데이터 전송하기
 
 
